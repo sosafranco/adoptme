@@ -1,25 +1,35 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import dotenv from "dotenv";
 import cookieParser from 'cookie-parser';
-import { errorHandler } from './middleware/errorHandler.js';
-
 import usersRouter from './routes/users.router.js';
 import petsRouter from './routes/pets.router.js';
 import adoptionsRouter from './routes/adoption.router.js';
 import sessionsRouter from './routes/sessions.router.js';
+import mocksRouter from "./routes/mocks.router.js";
+import manejadorError from "./middleware/error.middleware.js";
 
+// Config
+dotenv.config();
 const app = express();
-const PORT = process.env.PORT||8080;
-const connection = mongoose.connect(`mongodb+srv://francososa:estoesboca12@cluster0.5txnf.mongodb.net/ecommerce?retryWrites=true&w=majority`)
+const PORT = process.env.PORT || 8080;
+const HOST = "localhost";
+const connection = mongoose.connect(`mongodb+srv://francososa:estoesboca12@cluster0.5txnf.mongodb.net/ecommerce?retryWrites=true&w=majority`);
 
+// Middlewares
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Routes
 app.use('/api/users',usersRouter);
 app.use('/api/pets',petsRouter);
 app.use('/api/adoptions',adoptionsRouter);
 app.use('/api/sessions',sessionsRouter);
+app.use("/api/mocks", mocksRouter);
 
-app.use(errorHandler);
+// Error Middleware
+app.use(manejadorError);
 
-app.listen(PORT,()=>console.log(`Listening on ${PORT}`))
+// Server
+app.listen(PORT,() => console.log(`Listening on http://${HOST}:${PORT}`));

@@ -1,6 +1,5 @@
 import userModel from "./models/User.js";
 
-
 export default class Users {
     
     get = (params) =>{
@@ -21,5 +20,13 @@ export default class Users {
 
     delete = (id) =>{
         return userModel.findByIdAndDelete(id);
+    }
+
+    insert = (doc) => {
+        return userModel.insertMany(doc);
+    }
+
+    create = (doc) => {
+        return userModel.save(doc)
     }
 }
