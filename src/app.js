@@ -1,6 +1,5 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import dotenv from "dotenv";
 import cookieParser from 'cookie-parser';
 import usersRouter from './routes/users.router.js';
 import petsRouter from './routes/pets.router.js';
@@ -10,7 +9,6 @@ import mocksRouter from "./routes/mocks.router.js";
 import manejadorError from "./middleware/error.middleware.js";
 
 // Config
-dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 const HOST = "localhost";
