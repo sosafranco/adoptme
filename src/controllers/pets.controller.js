@@ -55,7 +55,6 @@ const getMockingPets = async(req, res) => {
             const pet = generatePets();
             pets.push(pet);
         }
-
         const savedPets = await petsService.insert(pets)
         return res.status(201).json(savedPets);
     } catch (error) {
@@ -65,8 +64,8 @@ const getMockingPets = async(req, res) => {
 };
 
 const postMockingPets = async(req, res, next) => {
-    const { name, specie } = req.body;
     try {
+        const { name, specie } = req.body;
         if (!name || !specie) {
             throw CustomError.crearError({
                 nombre: "Mascota nueva",
@@ -75,7 +74,6 @@ const postMockingPets = async(req, res, next) => {
                 codigo: Errors.TIPO_INVALIDO
             });
         }
-
         const pet = PetDTO.getPetInputFrom({ name, specie });
         const savedPet = await petsService.create(pet);
         res.status(201).json({ message: "Mascota agregada exitosamente", pet: savedPet });
