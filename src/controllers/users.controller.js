@@ -33,15 +33,14 @@ const deleteUser = async(req,res) =>{
     res.send({status:"success",message:"User deleted"})
 }
 
-const getMockingUsers = async (req, res) => {
+const getMockingUsers = async(req, res) => {
     try {
         const users = [];
         for (let i = 0; i < 50; i++) {
             const user = generateUsers();
             user.password = await createHash(user.password);
-            users.push(user);
+            users.push(user)
         }
-
         const savedUsers = await usersService.insert(users);
         return res.status(201).json(savedUsers);
     } catch (error) {
@@ -50,10 +49,9 @@ const getMockingUsers = async (req, res) => {
     }
 };
 
-const postMockingUsers = async (req, res, next) => {
-    const { first_name, last_name, email, password } = req.body;
-
+const postMockingUsers = async(req, res, next) => {
     try {
+        const { first_name, last_name, email, password } = req.body;
         if (!first_name || !last_name || !email || !password) {
             throw CustomError.crearError({
                 nombre: "Usuario nuevo",
@@ -62,23 +60,16 @@ const postMockingUsers = async (req, res, next) => {
                 codigo: Errors.TIPO_INVALIDO
             });
         }
-
         const existingUser = await usersService.getBy({ email });
-        if (existingUser) {
-            return res.status(400).json({ error: "Email ya está registrado" });
-        }
-
+        if (existingUser) return res.status(400).json({ error: "Email ya está registrado" });
         const hashedPassword = await createHash(password);
-
         const user = {
             first_name,
             last_name,
             email,
             password: hashedPassword,
         };
-
         const savedUser = await usersService.create(user);
-
         res.status(201).json({ message: "Usuario agregado exitosamente", user: savedUser });
     } catch (error) {
         next(error);
@@ -88,26 +79,19 @@ const postMockingUsers = async (req, res, next) => {
 const generateData = async(req, res) => {
     try {
         const { users = 0, pets = 0 } = req.query;
-
         const petsList = [];
         for (let i = 0; i < Number(pets); i++) {
             const pet = generatePets();
             petsList.push(pet);
         }
-
         const savedPets = await petsService.insert(petsList);
-        console.log(`${petsList.length} pets generated and saved.`);
-
         const usersList = [];
         for (let i = 0; i < Number(users); i++) {
             const user = generateUsers();
             user.password = await createHash(user.password);
             usersList.push(user);
         }
-
         const savedUsers = await usersService.insert(usersList);
-        console.log(`${usersList.length} users generated and saved.`);
-
         return res.status(201).json({
             message: "Data generated successfully",
             generated: {
