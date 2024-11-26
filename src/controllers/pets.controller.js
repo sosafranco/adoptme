@@ -6,49 +6,49 @@ import CustomError from "../services/errors/custom.error.js";
 import generateInfoError from "../services/errors/info.js";
 import Errors from "../services/errors/enums.js";
 
-const getAllPets = async(req,res)=>{
+const getAllPets = async (req, res) => {
     const pets = await petsService.getAll();
-    res.send({status:"success",payload:pets})
+    res.send({ status: "success", payload: pets })
 }
 
-const createPet = async(req,res)=> {
-    const {name,specie,birthDate} = req.body;
-    if(!name||!specie||!birthDate) return res.status(400).send({status:"error",error:"Incomplete values"})
-    const pet = PetDTO.getPetInputFrom({name,specie,birthDate});
+const createPet = async (req, res) => {
+    const { name, specie, birthDate } = req.body;
+    if (!name || !specie || !birthDate) return res.status(400).send({ status: "error", error: "Incomplete values" })
+    const pet = PetDTO.getPetInputFrom({ name, specie, birthDate });
     const result = await petsService.create(pet);
-    res.send({status:"success",payload:result})
+    res.send({ status: "success", payload: result })
 }
 
-const updatePet = async(req,res) =>{
+const updatePet = async (req, res) => {
     const petUpdateBody = req.body;
     const petId = req.params.pid;
-    const result = await petsService.update(petId,petUpdateBody);
-    res.send({status:"success",message:"pet updated"})
+    const result = await petsService.update(petId, petUpdateBody);
+    res.send({ status: "success", message: "pet updated" })
 }
 
-const deletePet = async(req,res)=> {
+const deletePet = async (req, res) => {
     const petId = req.params.pid;
     const result = await petsService.delete(petId);
-    res.send({status:"success",message:"pet deleted"});
+    res.send({ status: "success", message: "pet deleted" });
 }
 
-const createPetWithImage = async(req,res) =>{
+const createPetWithImage = async (req, res) => {
     const file = req.file;
-    const {name,specie,birthDate} = req.body;
-    if(!name||!specie||!birthDate) return res.status(400).send({status:"error",error:"Incomplete values"})
+    const { name, specie, birthDate } = req.body;
+    if (!name || !specie || !birthDate) return res.status(400).send({ status: "error", error: "Incomplete values" })
     console.log(file);
     const pet = PetDTO.getPetInputFrom({
         name,
         specie,
         birthDate,
-        image:`${__dirname}/../public/img/${file.filename}`
+        image: `${__dirname}/../public/img/${file.filename}`
     });
     console.log(pet);
     const result = await petsService.create(pet);
-    res.send({status:"success",payload:result})
+    res.send({ status: "success", payload: result })
 }
 
-const getMockingPets = async(req, res) => {
+const getMockingPets = async (req, res) => {
     try {
         const pets = [];
         for (let i = 0; i < 100; i++) {
@@ -63,7 +63,7 @@ const getMockingPets = async(req, res) => {
     }
 };
 
-const postMockingPets = async(req, res, next) => {
+const postMockingPets = async (req, res, next) => {
     try {
         const { name, specie } = req.body;
         if (!name || !specie) {

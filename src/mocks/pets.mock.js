@@ -13,7 +13,7 @@ export const generatePet = () => {
 
 export const generateManyPets = (count) => {
     const pets = [];
-    for(let i=0; i<count; i++) {
+    for (let i = 0; i < count; i++) {
         pets.push(generatePet());
     }
     return pets;

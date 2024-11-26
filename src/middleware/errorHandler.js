@@ -1,6 +1,6 @@
 export const errorHandler = (error, req, res, next) => {
     console.log(error);
-    if(error.code) {
+    if (error.code) {
         res.status(400).send({
             status: 'error',
             error: error.name,

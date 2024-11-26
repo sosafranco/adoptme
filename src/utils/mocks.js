@@ -22,7 +22,7 @@ const generateUsers = () => {
     //         _id: new mongoose.Types.ObjectId(), // Simulación de una referencia de mascota
     //     });
     // }
-    
+
     return {
         first_name: faker.person.firstName(),
         last_name: faker.person.lastName(),

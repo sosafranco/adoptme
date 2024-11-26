@@ -6,34 +6,34 @@ import generateInfoError from "../services/errors/info.js";
 import Errors from "../services/errors/enums.js";
 import { createHash } from "../utils/index.js";
 
-const getAllUsers = async(req,res)=>{
+const getAllUsers = async (req, res) => {
     const users = await usersService.getAll();
-    res.send({status:"success",payload:users})
+    res.send({ status: "success", payload: users })
 }
 
-const getUser = async(req,res)=> {
+const getUser = async (req, res) => {
     const userId = req.params.uid;
     const user = await usersService.getUserById(userId);
-    if(!user) return res.status(404).send({status:"error",error:"User not found"})
-    res.send({status:"success",payload:user})
+    if (!user) return res.status(404).send({ status: "error", error: "User not found" })
+    res.send({ status: "success", payload: user })
 }
 
-const updateUser =async(req,res)=>{
+const updateUser = async (req, res) => {
     const updateBody = req.body;
     const userId = req.params.uid;
     const user = await usersService.getUserById(userId);
-    if(!user) return res.status(404).send({status:"error", error:"User not found"})
-    const result = await usersService.update(userId,updateBody);
-    res.send({status:"success",message:"User updated"})
+    if (!user) return res.status(404).send({ status: "error", error: "User not found" })
+    const result = await usersService.update(userId, updateBody);
+    res.send({ status: "success", message: "User updated" })
 }
 
-const deleteUser = async(req,res) =>{
+const deleteUser = async (req, res) => {
     const userId = req.params.uid;
     const result = await usersService.getUserById(userId);
-    res.send({status:"success",message:"User deleted"})
+    res.send({ status: "success", message: "User deleted" })
 }
 
-const getMockingUsers = async(req, res) => {
+const getMockingUsers = async (req, res) => {
     try {
         const users = [];
         for (let i = 0; i < 50; i++) {
@@ -49,7 +49,7 @@ const getMockingUsers = async(req, res) => {
     }
 };
 
-const postMockingUsers = async(req, res, next) => {
+const postMockingUsers = async (req, res, next) => {
     try {
         const { first_name, last_name, email, password } = req.body;
         if (!first_name || !last_name || !email || !password) {
@@ -76,7 +76,7 @@ const postMockingUsers = async(req, res, next) => {
     }
 };
 
-const generateData = async(req, res) => {
+const generateData = async (req, res) => {
     try {
         const { users = 0, pets = 0 } = req.query;
         const petsList = [];

@@ -1,8 +1,8 @@
 import Errors from "../services/errors/enums.js";
 
-const manejadorError = ( error, req, res, next ) => {
+const manejadorError = (error, req, res, next) => {
     console.log(error.causa);
-    switch(error.code) {
+    switch (error.code) {
         case Errors.TIPO_INVALIDO:
             res.send({ status: "error", error: error.nombre });
             break;
