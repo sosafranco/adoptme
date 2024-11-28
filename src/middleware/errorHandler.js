@@ -5,13 +5,13 @@ export const errorHandler = (error, req, res, next) => {
             status: 'error',
             error: error.name,
             cause: error.cause,
-            message: error.message
+            message: error.message,
         });
     } else {
         res.status(500).send({
             status: 'error',
             error: 'Error no manejado',
-            message: 'Error interno del servidor'
+            message: 'Error interno del servidor',
         });
     }
-}
+};

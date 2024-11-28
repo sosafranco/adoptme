@@ -1,32 +1,31 @@
-import petModel from "./models/Pet.js";
+import petModel from './models/Pet.js';
 
 export default class Pet {
+    get = params => {
+        return petModel.find(params);
+    };
 
-    get = (params) =>{
-        return petModel.find(params)
-    }
-
-    getBy = (params) =>{
+    getBy = params => {
         return petModel.findOne(params);
-    }
+    };
 
-    save = (doc) =>{
+    save = doc => {
         return petModel.create(doc);
-    }
+    };
 
-    update = (id,doc) =>{
-        return petModel.findByIdAndUpdate(id,{$set:doc})
-    }
+    update = (id, doc) => {
+        return petModel.findByIdAndUpdate(id, { $set: doc });
+    };
 
-    delete = (id) =>{
+    delete = id => {
         return petModel.findByIdAndDelete(id);
-    }
+    };
 
-    insert = (doc) => {
+    insert = doc => {
         return petModel.insertMany(doc);
-    }
+    };
 
-    create = (doc) => {
-        return petModel.save(doc)
-    }
+    create = doc => {
+        return petModel.save(doc);
+    };
 }
