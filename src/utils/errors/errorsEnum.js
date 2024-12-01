@@ -5,5 +5,5 @@ export const errorsEnum = {
     PET_NOT_FOUND: 'Mascota no encontrada',
     INVALID_CREDENTIALS: 'Credenciales inválidas',
     DATABASE_ERROR: 'Error en la base de datos',
-    MISSING_DATA: 'Faltan datos requeridos'
-}
+    MISSING_DATA: 'Faltan datos requeridos',
+};

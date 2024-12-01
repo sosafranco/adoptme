@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { faker } from "@faker-js/faker";
+import { faker } from '@faker-js/faker';
 import { createHash } from './index.js';
 
 const generatePets = () => {
@@ -8,7 +8,7 @@ const generatePets = () => {
         specie: faker.animal.type(),
         birthDate: faker.date.past(5),
         adopted: false,
-        owner: "",
+        owner: '',
         image: faker.image.url(),
     };
 };
@@ -27,7 +27,7 @@ const generateUsers = () => {
         first_name: faker.person.firstName(),
         last_name: faker.person.lastName(),
         email: faker.internet.email(),
-        password: "coder123",
+        password: 'coder123',
         role: 'user',
         pets: [],
     };

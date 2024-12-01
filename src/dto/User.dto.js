@@ -3,7 +3,7 @@ export default class UserDTO {
         return {
             name: `${user.first_name} ${user.last_name}`,
             role: user.role,
-            email: user.email
-        }
+            email: user.email,
+        };
     }
 }

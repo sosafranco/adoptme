@@ -5,16 +5,16 @@ const collection = 'Users';
 const schema = new mongoose.Schema({
     first_name: {
         type: String,
-        required: true
+        required: true,
     },
     last_name: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     password: {
         type: String,
@@ -22,20 +22,20 @@ const schema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: [ "user", "admin" ],
-        default: "user"
+        enum: ['user', 'admin'],
+        default: 'user',
     },
     pets: {
         type: [
             {
                 _id: {
                     type: mongoose.SchemaTypes.ObjectId,
-                    ref: 'Pets'
-                }
-            }
+                    ref: 'Pets',
+                },
+            },
         ],
-        default: []
-    }
+        default: [],
+    },
 });
 
 const userModel = mongoose.model(collection, schema);
