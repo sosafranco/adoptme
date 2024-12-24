@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "mocha test/supertest.test.js"
+    "test": "mocha test/user.test.js"
   },
   "keywords": [],
   "author": "",
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "chai": "^5.1.2",
-    "mocha": "^10.8.2",
-    "nodemon": "^3.1.7"
+    "mocha": "^11.0.1",
+    "nodemon": "^3.1.9"
   }
 }

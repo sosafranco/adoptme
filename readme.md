@@ -11,6 +11,7 @@ AdoptMe is a web application built with Node.js and Express that facilitates pet
 - Mock data generation for testing
 - Error handling middleware
 - MongoDB integration
+- Docker support
 
 ## Tech Stack
 - Node.js
@@ -22,6 +23,7 @@ AdoptMe is a web application built with Node.js and Express that facilitates pet
 - Faker.js for mock data
 - Cookie Parser
 - dotenv for environment variables
+- Docker
 
 ## Installation
 ```bash
@@ -38,6 +40,23 @@ PORT=8080
 # Run the application
 npm run dev   # Development mode
 npm start     # Production mode
+```
+
+## Docker
+To run the application using Docker, follow these steps:
+
+```bash
+# Build the Docker image
+docker build -t franadoptme .
+
+# Run the Docker container
+docker run -p 8080:8080 franadoptme
+```
+
+You can also pull the Docker image from Docker Hub:
+
+```bash
+docker pull francososa1/franadoptme
 ```
 
 ## API Endpoints
@@ -85,6 +104,10 @@ The application implements a custom error handling system with:
 - Error enumerations
 - Detailed error information generation
 - Middleware error handler
+
+## Docker Hub
+- [Repository URL](https://hub.docker.com/r/francososa1/franadoptme)
+- [Profile URL](https://hub.docker.com/u/francososa1)
 
 ## Contributors
 [List of contributors]
