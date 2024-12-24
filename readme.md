@@ -80,6 +80,7 @@ docker pull francososa1/franadoptme
 - `POST /api/adoptions/:uid/:pid` - Create new adoption
 
 ## Testing
+This project uses Mocha and Chai for testing.
 ```bash
 npm run test
 ```
@@ -96,6 +97,8 @@ src/
 ├── routes/        # API routes
 ├── services/      # Business logic
 └── utils/         # Utility functions
+test/
+|-- user.test.js   # Endpoints testing
 ```
 
 ## Error Handling
