@@ -11,10 +11,19 @@ import manejadorError from './middleware/error.middleware.js';
 
 // Configuración
 dotenv.config();
+
+// Verificar si las variables de entorno se están cargando correctamente
+console.log('MONGO_URL:', process.env.MONGO_URL);
+console.log('PORT:', process.env.PORT);
+
 const app = express();
 const PORT = process.env.PORT || 8080;
-const HOST = 'localhost';
-const connection = mongoose.connect(process.env.MONGO_URL);
+const HOST = '0.0.0.0'; // Cambiado de 'localhost' para permitir conexiones externas en Docker
+
+// Conexión a MongoDB
+mongoose.connect(process.env.MONGO_URL)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 // Middlewares
 app.use(express.json());
@@ -28,8 +37,22 @@ app.use('/api/adoptions', adoptionsRouter);
 app.use('/api/sessions', sessionsRouter);
 app.use('/api/mocks', mocksRouter);
 
+// Ruta de prueba
+app.get('/', (req, res) => {
+  res.send('Hello from AdoptMe API!');
+});
+
 // Manejador de errores
 app.use(manejadorError);
 
 // Inicialización del servidor
-app.listen(PORT, () => console.log(`Listening on http://${HOST}:${PORT}`));
+app.listen(PORT, HOST, () => console.log(`Server running on http://${HOST}:${PORT}`));
+
+// Manejo de errores no capturados
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  // Application specific logging, throwing an error, or other logic here
+});
+
+export default app;
+
