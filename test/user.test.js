@@ -4,9 +4,7 @@ import { startServer } from '../src/app.js';
 import Adoption from '../src/dao/models/Adoption.js';
 import User from '../src/dao/models/User.js';
 import Pet from '../src/dao/models/Pet.js';
-import chai from 'chai';
-
-const expect = chai.expect;
+import {expect} from 'chai';
 
 describe("Adoption Router Functional Tests", function () {
     let server;
@@ -16,7 +14,7 @@ describe("Adoption Router Functional Tests", function () {
 
     before(async function () {
         this.timeout(5000);
-        await mongoose.connect(process.env.MONGODB_URI);
+        await mongoose.connect(process.env.MONGO_URL);
         server = await startServer(8081);
     });
 

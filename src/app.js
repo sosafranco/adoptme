@@ -17,8 +17,17 @@ console.log('MONGO_URL:', process.env.MONGO_URL);
 console.log('PORT:', process.env.PORT);
 
 const app = express();
-const PORT = process.env.PORT || 8080;
-const HOST = '0.0.0.0'; // Cambiado de 'localhost' para permitir conexiones externas en Docker
+// const PORT = process.env.PORT || 8080;
+// const HOST = '0.0.0.0'; // Cambiado de 'localhost' para permitir conexiones externas en Docker
+
+export const startServer = (port) => {
+  return new Promise((resolve) => {
+      const server = app.listen(port, () => {
+          console.log(`Servidor escuchando en http://localhost:${port}/`);
+          resolve(server);
+      });
+  });
+};
 
 // Conexión a MongoDB
 mongoose.connect(process.env.MONGO_URL)
@@ -46,7 +55,7 @@ app.get('/', (req, res) => {
 app.use(manejadorError);
 
 // Inicialización del servidor
-app.listen(PORT, HOST, () => console.log(`Server running on http://${HOST}:${PORT}`));
+// app.listen(PORT, HOST, () => console.log(`Server running on http://${HOST}:${PORT}`));
 
 // Manejo de errores no capturados
 process.on('unhandledRejection', (reason, promise) => {
